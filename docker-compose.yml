@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  chessapidbsrv:
+    image: mongo
+    container_name: chessapidbsrv
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: ChessMoveDB
+      MONGO_INITDB_ROOT_USERNAME: chessusr
+      MONGO_INITDB_ROOT_PASSWORD: chess00usr11
+  app:
+    container_name: chessapi-app
+    image: chessapi-app
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+    ports:
+      - 4000:4000
